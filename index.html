@@ -13,12 +13,21 @@
             let choice = choices[Math.floor(Math.random()*choices.length)];
             return choice;
         }
+        // function playRound(playerSelection, computerSelection){
+        //     let choices = ["paper", "scissors", "rock"];
+        //         if ((playerSelection === "paper") && (computerSelection === "rock")){
+        //             return `You win! paper covers rock!`;
+        //         }    
+        // }
+
         function playRound(playerSelection, computerSelection){
-            let choices = ["paper", "scissors", "rock"];
-                if ((playerSelection === "paper") && (computerSelection === "rock")){
-                    return `You win! paper covers rock!`;
-                }    
+            if(computerSelection == "paper"){
+                return `You lose! paper covers rock`;
+            }            
         }
+        const playerSelection = "rock";
+        const computerSelection = computerPlay();
+        playRound(playerSelection, computerSelection);
     </script>
 
 </body>
