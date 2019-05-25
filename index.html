@@ -13,6 +13,13 @@
             let choice = choices[Math.floor(Math.random()*choices.length)];
             return choice;
         }
+        function playRound(playerSelection, computerSelection){
+            let choices = ["paper", "scissors", "rock"];
+                if ((playerSelection === "paper") && (computerSelection === "rock")){
+                    return `You win! paper covers rock!`;
+                }    
+        }
     </script>
+
 </body>
 </html>
