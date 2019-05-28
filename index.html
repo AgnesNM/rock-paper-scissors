@@ -8,27 +8,89 @@
 </head>
 <body>
     <script>
+        compPoints = 0;
+        points = 1;
+        var playerPoints = 0;
+        let rounds = 0;
+
         function computerPlay (){
             let choices = ["rock", "paper", "scissors"];
             let choice = choices[Math.floor(Math.random()*choices.length)];
             return choice;
-        }
-        // function playRound(playerSelection, computerSelection){
-        //     let choices = ["paper", "scissors", "rock"];
-        //         if ((playerSelection === "paper") && (computerSelection === "rock")){
-        //             return `You win! paper covers rock!`;
-        //         }    
-        // }
+        }          
+
+        function player(){
+            let input = prompt("Rock, paper or scissors?").toLowerCase();
+                if ((input == "rock") || (input =="scissors") || (input = "paper")){
+                    return input;
+                }else{
+                    return `Please enter 'rock', 'paper' or 'scissors`;
+                }
+            }
 
         function playRound(playerSelection, computerSelection){
-            if(computerSelection == "paper"){
-                return `You lose! paper covers rock`;
+            if (computerSelection == playerSelection){
+                return `Computer chose ${computerPlay()} and you chose ${player()}`;
+            }
+            if(computerSelection.toLowerCase() == "rock"){
+                if(playerSelection == "paper"){
+                    playerPoints+=points;
+                        return `You win this round! paper covers rock!`;
             }            
+                else if(playerSelection.toLowerCase() == "scissors"){
+                    compPoints+=points;
+                    return `You lose this round! rock crushes scissors!`;
+                }
+            }   
+            else if (computerSelection.toLowerCase() == "paper"){
+                if(playerSelection == "rock"){
+                    compPoints+=points;
+                    return `You lose this round, paper covers rock!`
+                }
+                else if(playerSelection == "scissors"){
+                    playerPoints+=points;
+                    return `You win this round!, scissors cuts paper!`;
+                }
+            }   
+            else if(computerSelection.toLowerCase() == "scissors"){
+                if(playerSelection == "rock"){
+                    playerPoints+=points;
+                    return `You win! rock crushes scissors!`;
+            }
+                else if(playerSelection =="paper"){
+                    compPoints+=points;
+                    return `You lose this round! scissors cuts paper`;
+                }
+            }
         }
-        const playerSelection = "rock";
-        const computerSelection = computerPlay();
-        playRound(playerSelection, computerSelection);
-    </script>
 
+        function game(){
+            const playerSelection = player();
+            const computerSelection = computerPlay();
+            playRound(playerSelection, computerSelection);
+            rounds++;
+
+            while (rounds < 5) {
+                game();
+            }
+        totalcScore.push(compPoints);
+        let finalcScore = totalcScore.reduce((sum,current) => sum+current,0);
+        console.log(`The computer's final score is ${finalcScore}`);
+        
+        totalpScore.push(playerPoints);
+        let finalpScore = totalpScore.reduce((sum,current) => sum+current,0);
+        console.log(`Your final score is ${finalpScore}`);
+        
+        if(finalpScore<finalcScore){
+          console.log(`You lose!`);
+        }else if(finalpScore>finalcScore){
+          console.log(`You win!`);
+        }else if (finalcScore===finalpScore) {
+          console.log(`You tie`);
+        }
+        }
+        console.log(game());
+                  
+    </script>
 </body>
 </html>
